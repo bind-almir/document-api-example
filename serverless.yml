@@ -1,0 +1,103 @@
+service: document-api-example
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+
+plugins:
+  - serverless-aws-documentation
+
+custom: 
+  documentation:
+    api:
+      info:
+        version: '1.0.0'
+        title: Document API Example
+        description: “Documentation is a love letter that you write to your future self.”
+
+    models:     
+      -
+        name: "Hello"
+        description: "Hello post object"
+        contentType: "application/json"
+        schema:
+          type: "object"
+          properties:
+            name:
+              type: "string"
+              
+      -
+        name: "HelloMessage"
+        description: "Hello post object"
+        contentType: "application/json"
+        schema:
+          type: "object"
+          properties:
+            message:
+              type: "string"
+
+      -              
+        name: ErrorResponse
+        contentType: "application/json"
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+            statusCode:
+              type: number             
+
+functions:
+  get:
+    handler: handler.get
+    events: 
+     - http: 
+        path: hello
+        method: get
+        cors: true
+        documentation:
+          summary: "GET will say hi"
+          description: "Get hello from our GET endpoint"
+          tags:
+            - Hello
+          method: get
+          path: hello
+          methodResponses:
+            -
+              statusCode: "200"
+              responseModels:
+                "application/json": "HelloMessage"            
+            -
+              statusCode: "500"
+              responseModels:
+                "application/json": "ErrorResponse"   
+
+  post:
+    handler: handler.post
+    events: 
+     - http: 
+        path: hello
+        method: post
+        cors: true
+        documentation:
+            summary: "POST hello"
+            description: "POST will say hi to the name posted in body"
+            tags:
+              - Hello
+            method: get
+            path: hello
+            requestModels:
+              "application/json": "Hello"
+            methodResponses:
+              -
+                statusCode: "200"
+                responseModels:
+                  "application/json": "HelloMessage"            
+              -
+                statusCode: "400"
+                responseModels:
+                  "application/json": "ErrorResponse"   
+              -
+                statusCode: "500"
+                responseModels:
+                  "application/json": "ErrorResponse"   

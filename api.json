@@ -1,0 +1,195 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "“Documentation is a love letter that you write to your future self.”",
+    "version" : "2019-08-26T22:28:26Z",
+    "title" : "dev-document-api-example"
+  },
+  "host" : "z5k7tcjhig.execute-api.eu-west-1.amazonaws.com",
+  "basePath" : "/dev",
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/hello" : {
+      "get" : {
+        "tags" : [ "Hello" ],
+        "summary" : "GET will say hi",
+        "description" : "Get hello from our GET endpoint",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Hello"
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "uri" : "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:161728447039:function:document-api-example-dev-get/invocations",
+          "passthroughBehavior" : "when_no_match",
+          "httpMethod" : "POST",
+          "type" : "aws_proxy"
+        }
+      },
+      "post" : {
+        "tags" : [ "Hello" ],
+        "summary" : "POST hello",
+        "description" : "POST will say hi to the name posted in body",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Hello",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Hello"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "schema" : {
+              "$ref" : "#/definitions/Hello"
+            }
+          },
+          "400" : {
+            "description" : "400 response",
+            "schema" : {
+              "$ref" : "#/definitions/Hello"
+            }
+          },
+          "500" : {
+            "description" : "500 response",
+            "schema" : {
+              "$ref" : "#/definitions/Hello"
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "uri" : "arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:161728447039:function:document-api-example-dev-post/invocations",
+          "passthroughBehavior" : "when_no_match",
+          "httpMethod" : "POST",
+          "type" : "aws_proxy"
+        }
+      },
+      "options" : {
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Methods" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Credentials" : {
+                "type" : "string"
+              },
+              "Access-Control-Allow-Headers" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "responses" : {
+            "default" : {
+              "statusCode" : "200",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Credentials" : "'false'",
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,POST,GET'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              },
+              "responseTemplates" : {
+                "application/json" : "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          },
+          "passthroughBehavior" : "when_no_match",
+          "requestTemplates" : {
+            "application/json" : "{statusCode:200}"
+          },
+          "contentHandling" : "CONVERT_TO_TEXT",
+          "type" : "mock"
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Hello" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Hello post object"
+    },
+    "ErrorResponse" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string"
+        },
+        "statusCode" : {
+          "type" : "number"
+        }
+      }
+    }
+  },
+  "x-amazon-apigateway-documentation" : {
+    "version" : "a698bc2fa194a2d3cde9c4c2e6d205c173ac7342",
+    "createdDate" : "2019-08-26T22:28:38Z",
+    "documentationParts" : [ {
+      "location" : {
+        "type" : "API"
+      },
+      "properties" : {
+        "info" : {
+          "version" : "1.0.0",
+          "title" : "Document API Example",
+          "description" : "“Documentation is a love letter that you write to your future self.”"
+        }
+      }
+    }, {
+      "location" : {
+        "type" : "METHOD",
+        "path" : "/hello",
+        "method" : "GET"
+      },
+      "properties" : {
+        "description" : "Get hello from our GET endpoint",
+        "summary" : "GET will say hi",
+        "tags" : [ "Hello" ]
+      }
+    }, {
+      "location" : {
+        "type" : "METHOD",
+        "path" : "/hello",
+        "method" : "POST"
+      },
+      "properties" : {
+        "description" : "POST will say hi to the name posted in body",
+        "summary" : "POST hello",
+        "tags" : [ "Hello" ]
+      }
+    }, {
+      "location" : {
+        "type" : "MODEL",
+        "name" : "Hello"
+      },
+      "properties" : {
+        "description" : "Hello post object"
+      }
+    } ]
+  }
+}
