@@ -5,3 +5,5 @@ jspm_packages
 # Serverless directories
 .serverless
 swagger-ui
+test.sh
+api.json
