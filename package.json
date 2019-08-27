@@ -10,7 +10,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "aws",
+    "serverless",
+    "apigateway",
+    "swagger",
+    "cli",
+    "shell",
+    "s3"
+  ],
+  "author": "Almir Zulic",
+  "license": "MIT"
 }
