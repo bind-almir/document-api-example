@@ -4,7 +4,7 @@ There are many great languages and tools in the wild that can help you to create
 
 Read more [here](https://almirzulic.com/posts/documenting-serverless-api/).
 
-# Instructions
+** Instructions **
 
 - You'll need an Amazon Web Services account and credentials set up on your development machine. If you haven't done it before, here's a useful guide for [Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 - [Configure AWS credentials](https://serverless.com/framework/docs/providers/aws/guide/credentials/) to use with serverless framework.
